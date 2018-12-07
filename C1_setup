@@ -1,0 +1,7 @@
+#!/bin/sh
+
+apk update && apk add lighttpd php5 php5-cgi php5-curl php5-fpm sed
+sed -i -e 's/#   include "mod_fastcgi.conf"/include "mod_fastcgi.conf"/g' /etc/lighttpd/lighttpd.conf
+rc-update add lighttpd default && openrc
+
+mkdir -p /var/www/localhost/htdocs/

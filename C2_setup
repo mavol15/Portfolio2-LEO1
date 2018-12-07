@@ -1,0 +1,6 @@
+#!/bin/sh
+
+apk update && apk add socat && touch /bin/rng.sh && chmod +x /bin/rng.sh
+echo "#!/bin/sh" > /bin/rng.sh
+echo "dd if=/dev/urandom bs=4 count=16 status=none | od -A none -t u4" >> /bin/rng.sh
+socat -v -v tcp-listen:8080,fork,reuseaddr exec:/bin/rng.sh
